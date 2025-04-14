@@ -1,6 +1,6 @@
 {
     "name": "jupyterlab-mpi-job-launcher",
-    "version": "0.1.0",
+    "version": "0.2.2",
     "description": "A JupyterLab extension.",
     "keywords": [
         "jupyter",
@@ -57,10 +57,15 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
         "@jupyterlab/application": "^4.0.0",
+        "@jupyterlab/apputils": "^4.5.0",
         "@jupyterlab/coreutils": "^6.0.0",
+        "@jupyterlab/launcher": "^4.4.0",
         "@jupyterlab/services": "^7.0.0",
-        "@jupyterlab/settingregistry": "^4.0.0"
+        "@jupyterlab/settingregistry": "^4.0.0",
+        "@mui/material": "^7.0.2"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
