@@ -13,12 +13,13 @@ from .config import settings
 
 GRPC_SERVER = settings.GRPC_SERVER
 LOG_LEVEL = settings.LOG_LEVEL
+OSS_LOG_FILE_PATH = settings.OSS_LOG_FILE_PATH
 
 IS_DEV = LOG_LEVEL == "DEBUG"
 
 logger.remove()
 logger.add(
-    "mpi_job_handler.log",
+    OSS_LOG_FILE_PATH,
     rotation="00:00",
     retention="7 days",
     compression="zip",
@@ -79,7 +80,7 @@ class MpiJobHandler(APIHandler):
                 stub = service_pb2_grpc.MPIJobServiceStub(channel)
                 request = service_pb2.JobRequest(json_payload=json.dumps(json_payload))
                 response = stub.SubmitJob(request)
-                print("Response:", response.message)
+                logger.debug("Received response from GRPC_SERVER: {}", response)
 
             self.write({"message": response.message})
 
