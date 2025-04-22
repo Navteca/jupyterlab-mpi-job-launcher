@@ -1,4 +1,5 @@
 import json
+import re
 from loguru import logger
 import tornado
 import tornado.web
@@ -58,9 +59,15 @@ class MpiJobHandler(APIHandler):
                 if worker.get(field) is None:
                     raise ValueError(f"Worker parameter '{field}' is missing.")
 
+            full_url = self.request.full_url()
+            # full_url = "http://localhost:63118/user/jovyan/jupyterlab-mpi-job-launcher/workflows"
+            match = re.search("(\/user\/)(.*)(\/jupyterlab-mpi-job-launcher)", full_url)
+            username = match.group(2)
+
             # Construir el objeto payload con la nueva estructura
             json_payload = {
                 "dry-run": False,
+                "username": username,
                 "launcher": {
                     "cpu": launcher["cpu"],
                     "memory": launcher["memory"],
